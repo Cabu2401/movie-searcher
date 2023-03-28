@@ -1,0 +1,21 @@
+.error-message {
+  padding-top: 50px;
+  text-align: center;
+}
+
+.person-poster {
+  display:block;
+  margin:auto;
+}
+
+.default-person {
+  width: 200px;
+  height: 300px;
+  background-color: #dbdbdb;
+  text-align: center;
+}
+
+.person-picture {
+  padding-top: 120px;
+  font-size: 4em;
+}

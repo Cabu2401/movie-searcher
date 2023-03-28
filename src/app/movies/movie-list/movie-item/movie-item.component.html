@@ -1,0 +1,21 @@
+<a
+ class="list-group-item clearfix"
+ style="cursor: pointer;"
+ (click)="onGoToMovieDetails()">
+ <div class="row">
+   <div class="col-xs-8 col-sm-10">
+     <h4 class="list-group-item-heading">{{ movie.title | titlecase}}</h4>
+     <p *ngIf="movie.overview" class="list-group-item-text">{{ movie.overview.substring(0,200) }}</p>
+     <p *ngIf="!movie.overview">This movie doesn't have a description yet.</p>
+     <p><span class="label label-default">{{ movie.release_date | date:'fullDate' }}</span></p>
+   </div>
+   <div *ngIf="movie.poster_path" class="col-xs-4 col-sm-2">
+     <img [src]="imgBaseUrl + movie.poster_path" alt="image" class="img-responsive movie-poster">
+   </div>
+   <div *ngIf="!movie.poster_path" class="col-xs-4 col-sm-2">
+     <div class="default-poster img-responsive movie-poster">
+       <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+     </div>
+   </div>
+ </div>
+</a>

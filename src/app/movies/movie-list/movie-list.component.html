@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 text-center">
+      <img src="assets/img/movie-searcher-logo-black.png" alt="logo" width="200">
+  </div>
+  <div class="col-md-6 col-md-offset-3" style="margin-top: 25px;">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for a movie" (keyup)="onKey($event)" #searchInput>
+      <span class="input-group-btn">
+        <button class="btn btn-warning" type="button" (click)="onSearchMovies(searchInput.value)">Go</button>
+      </span>
+    </div>
+  </div>
+</div>
+<div class="row movie-list-container">
+  <div class="col-md-8 col-md-offset-2">
+    <app-movie-item *ngFor="let movieEl of movies" [movie]="movieEl" [movieId]="movieEl.id"></app-movie-item>
+  </div>
+</div>
+<div *ngIf="totalResults === 0 && !errorMsg" class="row">
+  <div class="col-md-6 col-md-offset-3 text-center">
+    <p *ngIf="noResults" class="bg-info info-message">We cannot found movies with that name. Try with something else.</p>
+    <h2>Come on!</h2>
+    <h3>Type something to search some movies.</h3>
+  </div>
+</div>
+<div *ngIf="totalResults === 0 && errorMsg" class="row">
+  <div class="col-md-6 col-md-offset-3 text-center">
+    <h1>Upss! Something went wrong.</h1>
+    <p class="bg-danger error-message">{{ errorMsg }}</p>
+  </div>
+</div>
+<div *ngIf="totalResults !== 0" class="row">
+  <div class="col-md-8 col-md-offset-2 text-center">
+    <ngb-pagination
+      [collectionSize]="totalResults"
+      [(page)]="this.moviesService.page"
+      [maxSize]="15"
+      [pageSize]="20"
+      [rotate]="true"
+      [ellipses]="false"
+      [boundaryLinks]="true"
+      (pageChange)="onChangePage()"></ngb-pagination>
+  </div>
+</div>
+

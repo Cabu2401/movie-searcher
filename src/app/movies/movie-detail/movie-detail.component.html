@@ -1,0 +1,94 @@
+<div *ngIf="movieData">
+  <div class="row">
+    <div *ngIf="movieData.poster_path" class="col-sm-3">
+      <img [src]="imgBaseUrl + movieData.poster_path" alt="image" class="img-responsive movie-poster" style="max-height: 300px;">
+    </div>
+    <div *ngIf="!movieData.poster_path" class="col-sm-3">
+      <div class="default-poster img-responsive movie-poster">
+        <span class="glyphicon glyphicon-picture movie-picture" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <h1>{{ movieData.title }}</h1>
+      <p>
+        <span class="label label-default">{{ movieData.release_date | date:'fullDate' }}</span>
+        -
+        <span class="label label-primary">
+          <span *ngFor="let genre of movieData.genres; let i = index">{{ (i > 0 ? ' - ' : '') + genre.name }} </span>
+        </span>
+      </p>
+      <p><ngb-rating [rate]="movieData.vote_average"></ngb-rating></p>
+      <p><strong>Status: </strong><span class="label label-info">{{ movieData.status }}</span></p>
+      <p><strong>Original Language: </strong><span class="label label-default">{{ movieData.original_language | uppercase}}</span></p>
+      <p>
+        <strong>Budget: </strong>
+        <span *ngIf="movieData.budget > 0" class="label label-danger">{{ movieData.budget | currency}}</span>
+        <span *ngIf="movieData.budget <= 0" class="glyphicon glyphicon-minus"></span>
+      </p>
+      <p>
+        <strong>Revenue: </strong>
+        <span *ngIf="movieData.revenue > 0" class="label label-success">{{ movieData.revenue | currency}}</span>
+        <span *ngIf="movieData.revenue <= 0" class="glyphicon glyphicon-minus"></span>
+      </p>
+      <h3>Description</h3>
+      <p>{{ movieData.overview }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <h1>Cast</h1>
+      <div *ngFor="let person of movieData.credits.cast" class="col-xs-12">
+        <a
+          class="list-group-item clearfix"
+          style="cursor: pointer;"
+          (click)="onGoToPersonDetails(person.id)">
+          <div class="row">
+            <div class="col-xs-8 col-sm-10">
+              <h4 class="list-group-item-heading">{{ person.name | titlecase }}</h4>
+              <p class="list-group-item-text">{{ person.character }}</p>
+            </div>
+            <div *ngIf="person.profile_path" class="col-xs-4 col-sm-2">
+              <img [src]="imgBaseUrl + person.profile_path" alt="image" class="img-responsive movie-person">
+            </div>
+            <div *ngIf="!person.profile_path" class="col-xs-4 col-sm-2">
+              <div class="default-person img-responsive movie-person">
+                <span class="glyphicon glyphicon-picture person-picture" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <h1>Crew</h1>
+      <div *ngFor="let person of movieData.credits.crew" class="col-xs-12">
+        <a
+          class="list-group-item clearfix"
+          style="cursor: pointer;"
+          (click)="onGoToPersonDetails(person.id)">
+          <div class="row">
+            <div class="col-xs-8 col-sm-10">
+              <h4 class="list-group-item-heading">{{ person.name | titlecase }}</h4>
+              <p class="list-group-item-text">{{ person.job }}</p>
+            </div>
+            <div *ngIf="person.profile_path" class="col-xs-4 col-sm-2">
+              <img [src]="imgBaseUrl + person.profile_path" alt="image" class="img-responsive movie-person">
+            </div>
+            <div *ngIf="!person.profile_path" class="col-xs-4 col-sm-2">
+              <div class="default-poster img-responsive movie-person">
+                <span class="glyphicon glyphicon-picture person-picture" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row error-message" *ngIf="!movieData && !isFetching">
+  <div class="col-xs-12">
+    <h1>Upss! Something went wrong.</h1>
+    <h2>We can't find the details for that movie.</h2>
+    <p>{{ errorMsg }}</p>
+  </div>
+</div>

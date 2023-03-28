@@ -1,0 +1,38 @@
+.error-message {
+  padding-top: 50px;
+  text-align: center;
+}
+
+.movie-poster {
+  display:block;
+  margin:auto;
+}
+
+.default-poster {
+  width: 200px;
+  height: 300px;
+  background-color: #dbdbdb;
+  text-align: center;
+}
+
+.default-person {
+  background-color: #dbdbdb;
+  text-align: center;
+}
+
+.movie-person {
+  width: 35px;
+  height: 45px;
+  display:block;
+  margin:auto;
+}
+
+.movie-picture {
+  padding-top: 120px;
+  font-size: 4em;
+}
+
+.person-picture {
+  padding-top: 15px;
+  font-size: 1em;
+}

@@ -1,0 +1,16 @@
+.default-poster {
+  background-color: #dbdbdb;
+  text-align: center;
+}
+
+.movie-poster {
+  width: 60px;
+  height: 90px;
+  display:block;
+  margin:auto;
+}
+
+.glyphicon-picture {
+  padding-top: 30px;
+  font-size: 2em;
+}

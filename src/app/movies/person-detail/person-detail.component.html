@@ -1,0 +1,34 @@
+<div *ngIf="personData">
+  <div class="row">
+    <div *ngIf="personData.profile_path" class="col-sm-3">
+      <img [src]="imgBaseUrl + personData.profile_path" alt="image" class="img-responsive person-poster" style="max-height: 300px;">
+    </div>
+    <div *ngIf="!personData.profile_path" class="col-sm-3">
+      <div class="default-person img-responsive person-poster">
+        <span class="glyphicon glyphicon-picture person-picture" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <h1>{{ personData.name }}</h1>
+      <p><span class="label label-primary">{{ personData.gender === 1 ? 'Female' : 'Male' }}</span></p>
+      <p><ngb-rating [rate]="personData.popularity"></ngb-rating></p>
+      <p><strong>Known For: </strong><span class="label label-info">{{ personData.known_for_department }}</span></p>
+      <p><strong>Birthday: </strong><span class="label label-default">{{ personData.birthday | date:'fullDate' }}</span></p>
+      <p *ngIf="personData.deathday"><strong>Deathday: </strong><span class="label label-default">{{ personData.deathday | date:'fullDate' }}</span></p>
+      <p><strong>Place of Birth: </strong><span class="label label-warning">{{ personData.place_of_birth }}</span></p>
+      <p>
+        <strong>Also Known As: </strong>
+        <span *ngFor="let itemName of personData.also_known_as; let i = index">{{ (i > 0 ? ' - ' : '') + itemName }}</span>
+      </p>
+      <h3>Biography</h3>
+      <p>{{ personData.biography }}</p>
+    </div>
+  </div>
+</div>
+<div class="row error-message" *ngIf="!personData && !isFetching">
+  <div class="col-xs-12">
+    <h1>Upss! Something went wrong.</h1>
+    <h2>We can't find the details for that person.</h2>
+    <p>{{ errorMsg }}</p>
+  </div>
+</div>

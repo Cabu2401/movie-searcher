@@ -1,0 +1,15 @@
+.movie-list-container {
+  padding-top: 25px;
+}
+
+.error-message {
+  padding: 15px 5px;
+  color: brown;
+  font-weight: bold;
+}
+
+.info-message {
+  padding: 15px 5px;
+  color: darkslateblue;
+  font-weight: bold;
+}
